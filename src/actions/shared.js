@@ -16,4 +16,4 @@ export function handleInitialDatas() {
         dispatch(setAuthedUser(AUTHED_ID)) 
       }
   }
-};
+}
