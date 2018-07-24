@@ -1,19 +1,19 @@
-import { getInitialData } from '../utils/api';
-import { receiveTweets } from '../actions/tweets';
-import { receiveUsers } from  '../actions/users';
-import { setAuthedUser } from '../actions/authedUser';
+import { getInitialData } from '../utils/api'
+import { receiveTweets } from '../actions/tweets'
+import { receiveUsers } from '../actions/users'
+import { setAuthedUser } from '../actions/authedUser'
 
-//authentification is hard coded
-const AUTHED_ID = 'tylermcginnis';
+// authentification is hard coded
+const AUTHED_ID = 'tylermcginnis'
 
-export function handleInitialDatas() {
-  return (dispatch) => { //thunk pattern with redux-thunk
-    return getInitialData() // retun a promise
-      .then( {users, tweets}) => { //promise which will pass to us an object with users and tweets properties
-        //let's add users, tweets to the redux store
+export function handleInitialData() {
+  return dispatch => // thunk pattern with redux-thunk
+    getInitialData() // retun a promise
+      .then(({ users, tweets }) => {
+        // promise which will pass to us an object with users and tweets properties
+        // let's add users, tweets to the redux store
         dispatch(receiveTweets(tweets))
         dispatch(receiveUsers(users))
-        dispatch(setAuthedUser(AUTHED_ID)) 
-      }
-  }
+        dispatch(setAuthedUser(AUTHED_ID))
+      })
 }
