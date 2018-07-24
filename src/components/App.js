@@ -1,21 +1,29 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
+// components
+import Dashboard from './Dashboard'
 
 class App extends Component {
   componentDidMount() {
-    const { dispatch } = this.props // added by react-redux
+    const { dispatch } = this.props // added by react-redux when I use connect
     dispatch(handleInitialData())
   }
   render() {
     return (
       <div>
-        Starter Code
+        {this.props.loading === true
+          ? null
+          : <Dashboard />}
       </div>
     )
   }
 }
 
 
-// in order to access to dispatch we need to connect the component
-export default connect()(App)
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null, // loading is true if is null
+  }
+}
+export default connect(mapStateToProps)(App)

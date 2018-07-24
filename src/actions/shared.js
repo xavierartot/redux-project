@@ -8,7 +8,7 @@ const AUTHED_ID = 'tylermcginnis'
 
 export function handleInitialData() {
   return dispatch => // thunk pattern with redux-thunk
-    getInitialData() // retun a promise
+    getInitialData() // return a promise
       .then(({ users, tweets }) => {
         // promise which will pass to us an object with users and tweets properties
         // let's add users, tweets to the redux store
