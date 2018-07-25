@@ -14,7 +14,7 @@ class App extends Component {
       <div>
         {this.props.loading === true
           ? null
-          : <Dashboard />}
+          : <Dashboard test="mapStateToProps" />}
       </div>
     )
   }
