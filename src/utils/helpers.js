@@ -4,11 +4,11 @@ export function formatDate(timestamp) {
   return `${time.substr(0, 5) + time.slice(-2)} | ${d.toLocaleDateString()}`
 }
 
-export function formatTweet(tweet, userAuthor, authedUser, parentTweet) {
+export function formatTweet(tweet, author, authedUser, parentTweet) {
   const {
-    id, likes, replies, text, timestamp, // tweets DB table
+    id, likes, replies, text, timestamp,
   } = tweet
-  const { name, avatarURL } = userAuthor // users DB table
+  const { name, avatarURL } = author
 
   return {
     name,
@@ -20,7 +20,7 @@ export function formatTweet(tweet, userAuthor, authedUser, parentTweet) {
     replies: replies.length,
     hasLiked: likes.includes(authedUser),
     parent: !parentTweet ? null : {
-      userAuthor: parentTweet.userAuthor,
+      author: parentTweet.author,
       id: parentTweet.id,
     },
   }

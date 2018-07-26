@@ -7,7 +7,6 @@ import TiHeartFullOutline from 'react-icons/lib/ti/heart-full-outline'
 
 class Tweet extends Component {
   render() {
-    // console.log(this.props)
     const { tweet } = this.props
     if (tweet === null) {
       return <p>This tweet doesn't exist</p>
@@ -24,6 +23,7 @@ class Tweet extends Component {
       name, timestamp, text, avatar, likes, replies, hasLiked, parent,
     } = tweet
 
+    // console.log(parent)
     return (
       <div className="tweet">
         <img
@@ -37,7 +37,7 @@ class Tweet extends Component {
             <div>{formatDate(timestamp)}</div>
             {parent && (
               <button className="replying-to" onClick={e => this.toParent(e, parent.id)}>
-                Replying to @{parent.userAuthor}
+                Replying to @{parent.author}
               </button>
             )}
             <p>{text}</p>
