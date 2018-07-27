@@ -5,7 +5,7 @@ export function formatDate(timestamp) {
   return `${time.substr(0, 5) + time.slice(-2)} | ${d.toLocaleDateString()}`
 }
 
-// reconstruit les données venant de la DB
+// reconstruit les données venant de la DB pour avoir le Tweet store
 export function formatTweet(tweet, author, authedUser, parentTweet) {
   const {
     id, likes, replies, text, timestamp,
