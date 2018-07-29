@@ -1,7 +1,6 @@
-import {saveLikeToggle} from './utils/api';
-export const RECEIVE_TWEETS = 'RECEIVE_TWEETS'; //actions type when receive tweets
-//describe the specifix event
-export const TOGGLE_TWEET = 'TOGGLE_TWEET'; //actions type when receive tweets
+import {saveLikeToggle} from '../utils/api';
+export const RECEIVE_TWEETS = 'RECEIVE_TWEETS';
+export const TOGGLE_TWEET = 'TOGGLE_TWEET';
 
 export function receiveTweets (tweets) {
   return {
@@ -11,10 +10,10 @@ export function receiveTweets (tweets) {
 }
 
 //let's make our action creator
-function toggleTweet ({ id, authedUser, hasLiked }) { 
+function toggleTweet ({ id, authedUser, hasLiked }) {
   return {
     type: TOGGLE_TWEET,
-    id, 
+    id,
     authedUser,
     hasLiked,
   }
@@ -26,11 +25,11 @@ export function handleToggleTweet (info) {
     //optimistic updating - UI first
     dispatch(toggleTweet(info))
     return saveLikeToggle(info)
-      .catch(e) {
+      .catch((e) => {
         console.warn('Error toggle tweet', e);
         //dispatch to back in time
         dispatch(toggleTweet(info)) // put back one more time to reset what it was initially
         alert('The was an error liking the tweet. Try again')
-      }
+      })
   }
 }

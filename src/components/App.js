@@ -4,6 +4,7 @@ import { handleInitialData } from '../actions/shared'
 // components
 import Dashboard from './Dashboard'
 import { LoadingBar } from 'react-redux-loading'
+import NewTweet from './NewTweet';
 
 class App extends Component {
   componentDidMount() {
@@ -13,10 +14,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <LoadingBar style={{ backgroundColor: 'blue', height: '35px' }} />
+        <LoadingBar />
         {this.props.loading === true
           ? null
-          : <Dashboard test="mapStateToProps" />}
+          : <NewTweet /> 
+        }
       </div>
     )
   }
