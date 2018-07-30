@@ -1,50 +1,65 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 class NewTweet extends Component {
   state = {
-    text : ''
+    text: '',
   }
-  handleChange = (e) => {
-    e.preventDefault()
-    const {text} = this.state
+  handleChange = (e) => { // onChange textarea
+    const { text } = this.state
     const value = e.target.value
-    this.setState(() => ({
-      text : value 
+    this.setState(() => ({// the values in state text
+      text: value,
     }))
   }
-  handleSubmit = (e) => {
+  handleSubmit = (e) => { // submit button
     e.preventDefault()
-    const value = e.target.value
-    console.log(value);
+    const { text } = this.state
+    // todo: Add Tweet to Store
+    console.log('New Tweet', text)
+
+    this.setState(() => ({
+      text: '',
+    }))
   }
   render() {
-    const {text} = this.state
-      
+    const { text } = this.state
+
+    { /* todo: redirect to / if submited */ }
+
+    const tweetLeft = 280 - text.length
+
     return (
-      <div className='NewTweet'>
-        <h3 className='center'>Compose new Tweet</h3>
-        <form 
-          className='new-tweet' 
-          onSubmit={this.handleSubmit}>
-          <textarea 
-            placeholder="what's happening" 
+      <div className="NewTweet">
+        <h3 className="center">Compose new Tweet</h3>
+        <form
+          className="new-tweet"
+          onSubmit={this.handleSubmit}
+        >
+          <textarea
+            placeholder="what's happening"
             value={text}
-            maxLength="280" 
-            className="textarea" 
-            onChange={this.handleChange}>
-          </textarea>
-          <button 
-            className="btn" 
-            type='submit' 
-            disabled={text === ''}>
+            maxLength="280"
+            className="textarea"
+            onChange={this.handleChange}
+          />
+          { tweetLeft <= 200 && (
+            <div className="tweet-length">
+              {tweetLeft} less
+            </div>
+          )}
+          <button
+            className="btn"
+            type="submit"
+            disabled={text === ''}
+          >
             Submit
           </button>
         </form>
       </div>
-    );
+    )
   }
 }
 
 
-export default NewTweet;
+export default NewTweet
