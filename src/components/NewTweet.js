@@ -1,33 +1,39 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { handleAddTweet } from '../actions/tweets';
 
 class NewTweet extends Component {
   state = {
     text: '',
   }
   handleChange = (e) => { // onChange textarea
-    const { text } = this.state
-    const value = e.target.value
+    const { text } = this.state;
+    const value = e.target.value;
     this.setState(() => ({// the values in state text
       text: value,
-    }))
+    }));
   }
   handleSubmit = (e) => { // submit button
-    e.preventDefault()
-    const { text } = this.state
+    e.preventDefault();
+    const { text } = this.state;
+    const { dispatch, id } = this.props;
+
+    console.log(id);
     // todo: Add Tweet to Store
-    console.log('New Tweet', text)
+    dispatch(handleAddTweet(text, id));
+
+    console.log('New Tweet', text);
 
     this.setState(() => ({
       text: '',
-    }))
+    }));
   }
   render() {
-    const { text } = this.state
+    const { text } = this.state;
 
-    { /* todo: redirect to / if submited */ }
+    // todo: redirect to / if submited
 
-    const tweetLeft = 280 - text.length
+    const tweetLeft = 280 - text.length;
 
     return (
       <div className="NewTweet">
@@ -57,9 +63,9 @@ class NewTweet extends Component {
           </button>
         </form>
       </div>
-    )
+    );
   }
 }
 
 
-export default NewTweet
+export default connect()(NewTweet);

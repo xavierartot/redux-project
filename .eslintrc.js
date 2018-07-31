@@ -8,11 +8,13 @@ module.exports = {
   },
   plugins: [
     'react',
+    'react-redux',
   ],
   extends: [
     'airbnb',
     // "eslint:recommended"
     'plugin:react/recommended',
+    'plugin:react-redux/recommended',
   ],
   rules: {
     'import/no-named-as-default': 0,
