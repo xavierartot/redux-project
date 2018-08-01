@@ -1,39 +1,43 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { handleAddTweet } from '../actions/tweets';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { handleAddTweet } from '../actions/tweets'
+import { Redirect } from 'react-router-dom'
 
 class NewTweet extends Component {
   state = {
     text: '',
+    redirectToHome: false, // determine if NewTweet is a reply to a tweet or a new tweet
   }
   handleChange = (e) => { // onChange textarea
-    const { text } = this.state;
-    const value = e.target.value;
+    const { text } = this.state
+    const value = e.target.value
     this.setState(() => ({// the values in state text
       text: value,
-    }));
+    }))
   }
   handleSubmit = (e) => { // submit button
-    e.preventDefault();
-    const { text } = this.state;
-    const { dispatch, id } = this.props;
+    e.preventDefault()
+    const { text } = this.state
+    const { dispatch, id } = this.props
 
-    console.log(id);
+    console.log(id)
     // todo: Add Tweet to Store
-    dispatch(handleAddTweet(text, id));
+    dispatch(handleAddTweet(text, id))
 
-    console.log('New Tweet', text);
+    console.log('New Tweet', text)
 
     this.setState(() => ({
       text: '',
-    }));
+      redirectToHome: !id, // new tweet is by itslef or using in Dashboard
+    }))
   }
   render() {
-    const { text } = this.state;
+    const { text, redirectToHome } = this.state
 
-    // todo: redirect to / if submited
-
-    const tweetLeft = 280 - text.length;
+    if (redirectToHome === true) {
+      return <Redirect to="/" />
+    }
+    const tweetLeft = 280 - text.length
 
     return (
       <div className="NewTweet">
@@ -43,11 +47,11 @@ class NewTweet extends Component {
           onSubmit={this.handleSubmit}
         >
           <textarea
+            className="textarea"
+            maxLength="280"
+            onChange={this.handleChange}
             placeholder="what's happening"
             value={text}
-            maxLength="280"
-            className="textarea"
-            onChange={this.handleChange}
           />
           { tweetLeft <= 200 && (
             <div className="tweet-length">
@@ -56,16 +60,16 @@ class NewTweet extends Component {
           )}
           <button
             className="btn"
-            type="submit"
             disabled={text === ''}
+            type="submit"
           >
             Submit
           </button>
         </form>
       </div>
-    );
+    )
   }
 }
 
 
-export default connect()(NewTweet);
+export default connect()(NewTweet)
