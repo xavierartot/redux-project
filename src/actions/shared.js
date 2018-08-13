@@ -7,7 +7,7 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 // authentification is hard coded
 const AUTHED_ID = 'tylermcginnis'
 
-export function handleInitialData() { // middleware
+export function handleInitialData() { // middleware thunk
   return (dispatch, getState) => { // thunk pattern with redux-thunk
     getInitialData() // return a promise
       .then(({ users, tweets }) => {
